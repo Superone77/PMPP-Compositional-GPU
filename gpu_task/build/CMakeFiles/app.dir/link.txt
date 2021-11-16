@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/app.dir/main.cc.o CMakeFiles/app.dir/kernel/nop_kernel.cu.o  -o app  -L/usr/local/cuda/targets/x86_64-linux/lib/stubs  -L/usr/local/cuda/targets/x86_64-linux/lib /usr/local/cuda/lib64/libcudart_static.a -lpthread -ldl /usr/lib/x86_64-linux-gnu/librt.so -lcudadevrt -lcudart_static -lrt -lpthread -ldl 
