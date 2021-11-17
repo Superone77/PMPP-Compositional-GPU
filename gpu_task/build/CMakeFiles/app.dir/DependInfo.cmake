@@ -5,7 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CUDA
-  "/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/nop_kernel.cu" "/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/build/CMakeFiles/app.dir/kernel/nop_kernel.cu.o"
+  "/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/kernel.cu" "/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/build/CMakeFiles/app.dir/kernel/kernel.cu.o"
   )
 set(CMAKE_CUDA_COMPILER_ID "NVIDIA")
 

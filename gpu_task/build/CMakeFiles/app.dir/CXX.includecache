@@ -14,16 +14,20 @@ stdint.h
 cuda_runtime.h
 -
 
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/nop_kernel.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/kernel.h
 ../commen.h
 /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/commen.h
 iostream
 -
+vector
+-
 
 /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/main.cc
-kernel/nop_kernel.h
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/nop_kernel.h
+kernel/kernel.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/kernel.h
 iostream
+-
+vector
 -
 
 /usr/local/cuda/include/builtin_types.h

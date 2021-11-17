@@ -123,32 +123,32 @@ app/fast:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
 
-kernel/nop_kernel.o: kernel/nop_kernel.cu.o
+kernel/kernel.o: kernel/kernel.cu.o
 
-.PHONY : kernel/nop_kernel.o
+.PHONY : kernel/kernel.o
 
 # target to build an object file
-kernel/nop_kernel.cu.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/nop_kernel.cu.o
-.PHONY : kernel/nop_kernel.cu.o
+kernel/kernel.cu.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/kernel.cu.o
+.PHONY : kernel/kernel.cu.o
 
-kernel/nop_kernel.i: kernel/nop_kernel.cu.i
+kernel/kernel.i: kernel/kernel.cu.i
 
-.PHONY : kernel/nop_kernel.i
+.PHONY : kernel/kernel.i
 
 # target to preprocess a source file
-kernel/nop_kernel.cu.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/nop_kernel.cu.i
-.PHONY : kernel/nop_kernel.cu.i
+kernel/kernel.cu.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/kernel.cu.i
+.PHONY : kernel/kernel.cu.i
 
-kernel/nop_kernel.s: kernel/nop_kernel.cu.s
+kernel/kernel.s: kernel/kernel.cu.s
 
-.PHONY : kernel/nop_kernel.s
+.PHONY : kernel/kernel.s
 
 # target to generate assembly for a file
-kernel/nop_kernel.cu.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/nop_kernel.cu.s
-.PHONY : kernel/nop_kernel.cu.s
+kernel/kernel.cu.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/kernel.cu.s
+.PHONY : kernel/kernel.cu.s
 
 main.o: main.cc.o
 
@@ -186,9 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... app"
 	@echo "... edit_cache"
-	@echo "... kernel/nop_kernel.o"
-	@echo "... kernel/nop_kernel.i"
-	@echo "... kernel/nop_kernel.s"
+	@echo "... kernel/kernel.o"
+	@echo "... kernel/kernel.i"
+	@echo "... kernel/kernel.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

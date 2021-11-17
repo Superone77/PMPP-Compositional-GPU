@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/app.dir/kernel/nop_kernel.cu.o"
+  "CMakeFiles/app.dir/kernel/kernel.cu.o"
   "CMakeFiles/app.dir/main.cc.o"
   "app"
   "app.pdb"
