@@ -11,8 +11,10 @@ __global__ void nopKernel(){
 void nopKernel_test(){
     dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
     dim3 dimGrid(1,1);
-
     nopKernel<<<dimGrid, dimBlock>>>();
 //    CUDA_CHECK_ERROR;
 }
+
+
+
 

@@ -1,4 +1,4 @@
-#include "kernel/nop_kernel.h"
+#include "kernel/kernel.h"
 #include <iostream>
 
 int main(){
