@@ -14,7 +14,25 @@ stdint.h
 cuda_runtime.h
 -
 
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/kernel.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/interfaces/KernelInterface.hpp
+../commen.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/commen.h
+iostream
+-
+string
+-
+
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/minCUDA.h
+../commen.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/commen.h
+../interfaces/KernelInterface.hpp
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/interfaces/KernelInterface.hpp
+iostream
+-
+vector
+-
+
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/nopCUDA.h
 ../commen.h
 /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/commen.h
 iostream
@@ -23,8 +41,10 @@ vector
 -
 
 /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/main.cc
-kernel/kernel.h
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/kernel.h
+kernel/nopCUDA.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/nopCUDA.h
+kernel/minCUDA.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/minCUDA.h
 iostream
 -
 vector

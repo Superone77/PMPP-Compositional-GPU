@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/app.dir/kernel/kernel.cu.o"
+  "CMakeFiles/app.dir/kernel/minCUDA.cu.o"
+  "CMakeFiles/app.dir/kernel/nopCUDA.cu.o"
   "CMakeFiles/app.dir/main.cc.o"
   "app"
   "app.pdb"

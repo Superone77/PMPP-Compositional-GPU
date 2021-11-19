@@ -15,7 +15,7 @@ public:
 
     virtual ~Kernel() = default;
 
-    virtual T_output Compute(T_input&& input) const = 0;
+    virtual T_output Compute(T_input input)= 0;
 
     virtual std::string Name() const = 0;
 };

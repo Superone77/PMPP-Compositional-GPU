@@ -150,6 +150,60 @@ kernel/kernel.cu.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/kernel.cu.s
 .PHONY : kernel/kernel.cu.s
 
+kernel/minCUDA.o: kernel/minCUDA.cu.o
+
+.PHONY : kernel/minCUDA.o
+
+# target to build an object file
+kernel/minCUDA.cu.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/minCUDA.cu.o
+.PHONY : kernel/minCUDA.cu.o
+
+kernel/minCUDA.i: kernel/minCUDA.cu.i
+
+.PHONY : kernel/minCUDA.i
+
+# target to preprocess a source file
+kernel/minCUDA.cu.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/minCUDA.cu.i
+.PHONY : kernel/minCUDA.cu.i
+
+kernel/minCUDA.s: kernel/minCUDA.cu.s
+
+.PHONY : kernel/minCUDA.s
+
+# target to generate assembly for a file
+kernel/minCUDA.cu.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/minCUDA.cu.s
+.PHONY : kernel/minCUDA.cu.s
+
+kernel/nopCUDA.o: kernel/nopCUDA.cu.o
+
+.PHONY : kernel/nopCUDA.o
+
+# target to build an object file
+kernel/nopCUDA.cu.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/nopCUDA.cu.o
+.PHONY : kernel/nopCUDA.cu.o
+
+kernel/nopCUDA.i: kernel/nopCUDA.cu.i
+
+.PHONY : kernel/nopCUDA.i
+
+# target to preprocess a source file
+kernel/nopCUDA.cu.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/nopCUDA.cu.i
+.PHONY : kernel/nopCUDA.cu.i
+
+kernel/nopCUDA.s: kernel/nopCUDA.cu.s
+
+.PHONY : kernel/nopCUDA.s
+
+# target to generate assembly for a file
+kernel/nopCUDA.cu.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/nopCUDA.cu.s
+.PHONY : kernel/nopCUDA.cu.s
+
 main.o: main.cc.o
 
 .PHONY : main.o
@@ -189,6 +243,12 @@ help:
 	@echo "... kernel/kernel.o"
 	@echo "... kernel/kernel.i"
 	@echo "... kernel/kernel.s"
+	@echo "... kernel/minCUDA.o"
+	@echo "... kernel/minCUDA.i"
+	@echo "... kernel/minCUDA.s"
+	@echo "... kernel/nopCUDA.o"
+	@echo "... kernel/nopCUDA.i"
+	@echo "... kernel/nopCUDA.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
