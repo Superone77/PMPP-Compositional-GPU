@@ -1,21 +1,20 @@
+#pragma once
+
 #include "../commen.h"
 #include <iostream>
 #include <string>
 
-template<typename T_input, typename T_output>
-class Kernel {
+class cKernel {
 public:
-    Kernel() = default;
+    cKernel() = default;
 
-    Kernel(const Kernel& other) = default;
-    Kernel(Kernel&& other) = default;
+    cKernel(const cKernel& other) = default;
+    cKernel(cKernel&& other) = default;
 
-    Kernel& operator=(const Kernel& other) = default;
-    Kernel& operator=(Kernel&& other) = default;
+    cKernel& operator=(const cKernel& other) = default;
+    cKernel& operator=(cKernel&& other) = default;
 
-    virtual ~Kernel() = default;
-
-    virtual T_output Compute(T_input input)= 0;
+    virtual ~cKernel() = default;
 
     virtual std::string Name() const = 0;
 };

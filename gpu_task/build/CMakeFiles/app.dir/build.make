@@ -70,64 +70,49 @@ CMakeFiles/app.dir/main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/main.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/main.cc -o CMakeFiles/app.dir/main.cc.s
 
-CMakeFiles/app.dir/kernel/kernel.cu.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/kernel/kernel.cu.o: ../kernel/kernel.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CUDA object CMakeFiles/app.dir/kernel/kernel.cu.o"
-	/usr/local/cuda/bin/nvcc  $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -c /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/kernel.cu -o CMakeFiles/app.dir/kernel/kernel.cu.o
+CMakeFiles/app.dir/kernel/MinCUDA.cu.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/kernel/MinCUDA.cu.o: ../kernel/MinCUDA.cu
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CUDA object CMakeFiles/app.dir/kernel/MinCUDA.cu.o"
+	/usr/local/cuda/bin/nvcc  $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -c /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/MinCUDA.cu -o CMakeFiles/app.dir/kernel/MinCUDA.cu.o
 
-CMakeFiles/app.dir/kernel/kernel.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/app.dir/kernel/kernel.cu.i"
+CMakeFiles/app.dir/kernel/MinCUDA.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/app.dir/kernel/MinCUDA.cu.i"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
 
-CMakeFiles/app.dir/kernel/kernel.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/app.dir/kernel/kernel.cu.s"
+CMakeFiles/app.dir/kernel/MinCUDA.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/app.dir/kernel/MinCUDA.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
-CMakeFiles/app.dir/kernel/minCUDA.cu.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/kernel/minCUDA.cu.o: ../kernel/minCUDA.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/app.dir/kernel/minCUDA.cu.o"
-	/usr/local/cuda/bin/nvcc  $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -c /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/minCUDA.cu -o CMakeFiles/app.dir/kernel/minCUDA.cu.o
+CMakeFiles/app.dir/kernel/NopCUDA.cu.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/kernel/NopCUDA.cu.o: ../kernel/NopCUDA.cu
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/app.dir/kernel/NopCUDA.cu.o"
+	/usr/local/cuda/bin/nvcc  $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -c /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/NopCUDA.cu -o CMakeFiles/app.dir/kernel/NopCUDA.cu.o
 
-CMakeFiles/app.dir/kernel/minCUDA.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/app.dir/kernel/minCUDA.cu.i"
+CMakeFiles/app.dir/kernel/NopCUDA.cu.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/app.dir/kernel/NopCUDA.cu.i"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
 
-CMakeFiles/app.dir/kernel/minCUDA.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/app.dir/kernel/minCUDA.cu.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
-
-CMakeFiles/app.dir/kernel/nopCUDA.cu.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/kernel/nopCUDA.cu.o: ../kernel/nopCUDA.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CUDA object CMakeFiles/app.dir/kernel/nopCUDA.cu.o"
-	/usr/local/cuda/bin/nvcc  $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -c /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/nopCUDA.cu -o CMakeFiles/app.dir/kernel/nopCUDA.cu.o
-
-CMakeFiles/app.dir/kernel/nopCUDA.cu.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/app.dir/kernel/nopCUDA.cu.i"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_PREPROCESSED_SOURCE
-
-CMakeFiles/app.dir/kernel/nopCUDA.cu.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/app.dir/kernel/nopCUDA.cu.s"
+CMakeFiles/app.dir/kernel/NopCUDA.cu.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CUDA source to assembly CMakeFiles/app.dir/kernel/NopCUDA.cu.s"
 	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CUDA_CREATE_ASSEMBLY_SOURCE
 
 # Object files for target app
 app_OBJECTS = \
 "CMakeFiles/app.dir/main.cc.o" \
-"CMakeFiles/app.dir/kernel/kernel.cu.o" \
-"CMakeFiles/app.dir/kernel/minCUDA.cu.o" \
-"CMakeFiles/app.dir/kernel/nopCUDA.cu.o"
+"CMakeFiles/app.dir/kernel/MinCUDA.cu.o" \
+"CMakeFiles/app.dir/kernel/NopCUDA.cu.o"
 
 # External object files for target app
 app_EXTERNAL_OBJECTS =
 
 app: CMakeFiles/app.dir/main.cc.o
-app: CMakeFiles/app.dir/kernel/kernel.cu.o
-app: CMakeFiles/app.dir/kernel/minCUDA.cu.o
-app: CMakeFiles/app.dir/kernel/nopCUDA.cu.o
+app: CMakeFiles/app.dir/kernel/MinCUDA.cu.o
+app: CMakeFiles/app.dir/kernel/NopCUDA.cu.o
 app: CMakeFiles/app.dir/build.make
 app: /usr/local/cuda/lib64/libcudart_static.a
 app: /usr/lib/x86_64-linux-gnu/librt.so
 app: CMakeFiles/app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -123,86 +123,59 @@ app/fast:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
 
-kernel/kernel.o: kernel/kernel.cu.o
+kernel/MinCUDA.o: kernel/MinCUDA.cu.o
 
-.PHONY : kernel/kernel.o
-
-# target to build an object file
-kernel/kernel.cu.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/kernel.cu.o
-.PHONY : kernel/kernel.cu.o
-
-kernel/kernel.i: kernel/kernel.cu.i
-
-.PHONY : kernel/kernel.i
-
-# target to preprocess a source file
-kernel/kernel.cu.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/kernel.cu.i
-.PHONY : kernel/kernel.cu.i
-
-kernel/kernel.s: kernel/kernel.cu.s
-
-.PHONY : kernel/kernel.s
-
-# target to generate assembly for a file
-kernel/kernel.cu.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/kernel.cu.s
-.PHONY : kernel/kernel.cu.s
-
-kernel/minCUDA.o: kernel/minCUDA.cu.o
-
-.PHONY : kernel/minCUDA.o
+.PHONY : kernel/MinCUDA.o
 
 # target to build an object file
-kernel/minCUDA.cu.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/minCUDA.cu.o
-.PHONY : kernel/minCUDA.cu.o
+kernel/MinCUDA.cu.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/MinCUDA.cu.o
+.PHONY : kernel/MinCUDA.cu.o
 
-kernel/minCUDA.i: kernel/minCUDA.cu.i
+kernel/MinCUDA.i: kernel/MinCUDA.cu.i
 
-.PHONY : kernel/minCUDA.i
+.PHONY : kernel/MinCUDA.i
 
 # target to preprocess a source file
-kernel/minCUDA.cu.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/minCUDA.cu.i
-.PHONY : kernel/minCUDA.cu.i
+kernel/MinCUDA.cu.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/MinCUDA.cu.i
+.PHONY : kernel/MinCUDA.cu.i
 
-kernel/minCUDA.s: kernel/minCUDA.cu.s
+kernel/MinCUDA.s: kernel/MinCUDA.cu.s
 
-.PHONY : kernel/minCUDA.s
+.PHONY : kernel/MinCUDA.s
 
 # target to generate assembly for a file
-kernel/minCUDA.cu.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/minCUDA.cu.s
-.PHONY : kernel/minCUDA.cu.s
+kernel/MinCUDA.cu.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/MinCUDA.cu.s
+.PHONY : kernel/MinCUDA.cu.s
 
-kernel/nopCUDA.o: kernel/nopCUDA.cu.o
+kernel/NopCUDA.o: kernel/NopCUDA.cu.o
 
-.PHONY : kernel/nopCUDA.o
+.PHONY : kernel/NopCUDA.o
 
 # target to build an object file
-kernel/nopCUDA.cu.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/nopCUDA.cu.o
-.PHONY : kernel/nopCUDA.cu.o
+kernel/NopCUDA.cu.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/NopCUDA.cu.o
+.PHONY : kernel/NopCUDA.cu.o
 
-kernel/nopCUDA.i: kernel/nopCUDA.cu.i
+kernel/NopCUDA.i: kernel/NopCUDA.cu.i
 
-.PHONY : kernel/nopCUDA.i
+.PHONY : kernel/NopCUDA.i
 
 # target to preprocess a source file
-kernel/nopCUDA.cu.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/nopCUDA.cu.i
-.PHONY : kernel/nopCUDA.cu.i
+kernel/NopCUDA.cu.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/NopCUDA.cu.i
+.PHONY : kernel/NopCUDA.cu.i
 
-kernel/nopCUDA.s: kernel/nopCUDA.cu.s
+kernel/NopCUDA.s: kernel/NopCUDA.cu.s
 
-.PHONY : kernel/nopCUDA.s
+.PHONY : kernel/NopCUDA.s
 
 # target to generate assembly for a file
-kernel/nopCUDA.cu.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/nopCUDA.cu.s
-.PHONY : kernel/nopCUDA.cu.s
+kernel/NopCUDA.cu.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/kernel/NopCUDA.cu.s
+.PHONY : kernel/NopCUDA.cu.s
 
 main.o: main.cc.o
 
@@ -240,15 +213,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... app"
 	@echo "... edit_cache"
-	@echo "... kernel/kernel.o"
-	@echo "... kernel/kernel.i"
-	@echo "... kernel/kernel.s"
-	@echo "... kernel/minCUDA.o"
-	@echo "... kernel/minCUDA.i"
-	@echo "... kernel/minCUDA.s"
-	@echo "... kernel/nopCUDA.o"
-	@echo "... kernel/nopCUDA.i"
-	@echo "... kernel/nopCUDA.s"
+	@echo "... kernel/MinCUDA.o"
+	@echo "... kernel/MinCUDA.i"
+	@echo "... kernel/MinCUDA.s"
+	@echo "... kernel/NopCUDA.o"
+	@echo "... kernel/NopCUDA.i"
+	@echo "... kernel/NopCUDA.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

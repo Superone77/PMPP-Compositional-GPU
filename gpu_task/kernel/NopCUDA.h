@@ -1,8 +1,9 @@
 #include "../commen.h"
+#include "../interfaces/KernelInterface.hpp"
 #include <iostream>
 #include <vector>
 
-class NopCUDA{
+class NopCUDA:cKernel{
 public:
     NopCUDA() = default;
 
@@ -14,7 +15,7 @@ public:
 
     virtual ~NopCUDA() = default;
 
-    void Compute();
+    void Compute(float& time);
 
     std::string Name() const{
         return "NopCUDA";

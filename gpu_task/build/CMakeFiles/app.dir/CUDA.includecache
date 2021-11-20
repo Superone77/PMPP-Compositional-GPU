@@ -22,13 +22,13 @@ iostream
 string
 -
 
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/minCUDA.cu
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/NopCUDA.cu
 stdio.h
 -
-minCUDA.h
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/minCUDA.h
+NopCUDA.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/NopCUDA.h
 
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/minCUDA.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/kernel/NopCUDA.h
 ../commen.h
 /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/gpu_task/commen.h
 ../interfaces/KernelInterface.hpp
