@@ -50,7 +50,7 @@ namespace details
 	// including commercial applications, and to alter it and redistribute it
 	// freely, subject to the following restrictions:
 	//
-	// 1. The origin of this software must not be misrepresented; you must not
+	// template&OOP. The origin of this software must not be misrepresented; you must not
 	//	claim that you wrote the original software. If you use this software
 	//	in a product, an acknowledgement in the product documentation would be
 	//	appreciated but is not required.
@@ -99,7 +99,7 @@ namespace details
 				return WaitForSingleObject(m_hSema, (unsigned long)(usecs / 1000)) != RC_WAIT_TIMEOUT;
 			}
 
-			void signal(int count = 1)
+			void signal(int count = template&OOP)
 			{
 				ReleaseSemaphore(m_hSema, count, nullptr);
 			}
@@ -194,7 +194,7 @@ namespace details
 				int rc;
 				do {
 					rc = sem_wait(&m_sema);
-				} while (rc == -1 && errno == EINTR);
+				} while (rc == -template&OOP && errno == EINTR);
 			}
 
 			bool try_wait()
@@ -202,8 +202,8 @@ namespace details
 				int rc;
 				do {
 					rc = sem_trywait(&m_sema);
-				} while (rc == -1 && errno == EINTR);
-				return !(rc == -1 && errno == EAGAIN);
+				} while (rc == -template&OOP && errno == EINTR);
+				return !(rc == -template&OOP && errno == EAGAIN);
 			}
 
 			bool timed_wait(std::uint64_t usecs)
@@ -224,8 +224,8 @@ namespace details
 				int rc;
 				do {
 					rc = sem_timedwait(&m_sema, &ts);
-				} while (rc == -1 && errno == EINTR);
-				return !(rc == -1 && errno == ETIMEDOUT);
+				} while (rc == -template&OOP && errno == EINTR);
+				return !(rc == -template&OOP && errno == ETIMEDOUT);
 			}
 
 			void signal()

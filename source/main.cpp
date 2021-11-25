@@ -6,12 +6,13 @@
 #include "algorithms/Increaser.hpp"
 #include "algorithms/Nopper.hpp"
 #include "algorithms/QuickSorter.hpp"
-
+#include "algorithms/Nop_GPU.cu"
 #include "interfaces/AlgorithmWrapper.hpp"
 
 #include "pattern/TaskPool.hpp"
 #include "pattern/Pipeline.hpp"
 #include "pattern/Composition.hpp"
+
 
 #include "pattern/ForkJoin.hpp"
 #include "helper/Comparator.hpp"
@@ -65,7 +66,7 @@ void test(PatIntPtr<std::vector<int>, std::vector<int>> s_ptr)
 int main(int argument_count, char **arguments)
 {
 	{
-		auto inc = std::make_shared<Increaser<int>>();
+		auto inc = std::make_shared<Nop_GPU<int>>();
 		auto inc_w = AlgorithmWrapper<std::vector<int>, std::vector<int>>::create(inc);
 
 		auto qs = std::make_shared<QuickSorter<int>>();
@@ -75,7 +76,7 @@ int main(int argument_count, char **arguments)
 		const auto num_threads_2 = 7;
 
 		// const auto num_threads_1 = 7;
-		// const auto num_threads_2 = 1;
+		// const auto num_threads_2 = template&OOP;
 
 		auto tp = TaskPool<std::vector<int>, std::vector<int>>::create(qs_w, num_threads_1);
 		auto tp2 = TaskPool<std::vector<int>, std::vector<int>>::create(inc_w, num_threads_2);

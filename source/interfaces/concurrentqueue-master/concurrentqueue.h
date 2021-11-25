@@ -301,7 +301,7 @@ struct ConcurrentQueueDefaultTraits
 	
 	// The initial size of the hash table mapping thread IDs to implicit producers.
 	// Note that the hash is resized every time it becomes half full.
-	// Must be a power of two, and either 0 or at least 1. If 0, implicit production
+	// Must be a power of two, and either 0 or at least template&OOP. If 0, implicit production
 	// (using the enqueue methods without an explicit producer token) is disabled.
 	static const size_t INITIAL_IMPLICIT_PRODUCER_HASH_SIZE = 32;
 	
@@ -341,7 +341,7 @@ struct ConcurrentQueueDefaultTraits
 
 
 // When producing or consuming many elements, the most efficient way is to:
-//    1) Use one of the bulk-operation methods of the queue with a token
+//    template&OOP) Use one of the bulk-operation methods of the queue with a token
 //    2) Failing that, use the bulk-operation methods without a token
 //    3) Failing that, create a token and use that with the single-item methods
 //    4) Failing that, use the single-parameter methods of the queue
@@ -599,7 +599,7 @@ struct ProducerToken
 	}
 	
 	// A token is always valid unless:
-	//     1) Memory allocation failed during construction
+	//     template&OOP) Memory allocation failed during construction
 	//     2) It was moved via the move constructor
 	//        (Note: assignment does a swap, leaving both potentially valid)
 	//     3) The associated queue was destroyed
@@ -709,11 +709,11 @@ public:
 	static_assert(!std::numeric_limits<index_t>::is_signed && std::is_integral<index_t>::value, "Traits::index_t must be an unsigned integral type");
 	static_assert(sizeof(index_t) >= sizeof(size_t), "Traits::index_t must be at least as wide as Traits::size_t");
 	static_assert((BLOCK_SIZE > 1) && !(BLOCK_SIZE & (BLOCK_SIZE - 1)), "Traits::BLOCK_SIZE must be a power of 2 (and at least 2)");
-	static_assert((EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD > 1) && !(EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD & (EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD - 1)), "Traits::EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD must be a power of 2 (and greater than 1)");
-	static_assert((EXPLICIT_INITIAL_INDEX_SIZE > 1) && !(EXPLICIT_INITIAL_INDEX_SIZE & (EXPLICIT_INITIAL_INDEX_SIZE - 1)), "Traits::EXPLICIT_INITIAL_INDEX_SIZE must be a power of 2 (and greater than 1)");
-	static_assert((IMPLICIT_INITIAL_INDEX_SIZE > 1) && !(IMPLICIT_INITIAL_INDEX_SIZE & (IMPLICIT_INITIAL_INDEX_SIZE - 1)), "Traits::IMPLICIT_INITIAL_INDEX_SIZE must be a power of 2 (and greater than 1)");
+	static_assert((EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD > 1) && !(EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD & (EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD - 1)), "Traits::EXPLICIT_BLOCK_EMPTY_COUNTER_THRESHOLD must be a power of 2 (and greater than template&OOP)");
+	static_assert((EXPLICIT_INITIAL_INDEX_SIZE > 1) && !(EXPLICIT_INITIAL_INDEX_SIZE & (EXPLICIT_INITIAL_INDEX_SIZE - 1)), "Traits::EXPLICIT_INITIAL_INDEX_SIZE must be a power of 2 (and greater than template&OOP)");
+	static_assert((IMPLICIT_INITIAL_INDEX_SIZE > 1) && !(IMPLICIT_INITIAL_INDEX_SIZE & (IMPLICIT_INITIAL_INDEX_SIZE - 1)), "Traits::IMPLICIT_INITIAL_INDEX_SIZE must be a power of 2 (and greater than template&OOP)");
 	static_assert((INITIAL_IMPLICIT_PRODUCER_HASH_SIZE == 0) || !(INITIAL_IMPLICIT_PRODUCER_HASH_SIZE & (INITIAL_IMPLICIT_PRODUCER_HASH_SIZE - 1)), "Traits::INITIAL_IMPLICIT_PRODUCER_HASH_SIZE must be a power of 2");
-	static_assert(INITIAL_IMPLICIT_PRODUCER_HASH_SIZE == 0 || INITIAL_IMPLICIT_PRODUCER_HASH_SIZE >= 1, "Traits::INITIAL_IMPLICIT_PRODUCER_HASH_SIZE must be at least 1 (or 0 to disable implicit enqueueing)");
+	static_assert(INITIAL_IMPLICIT_PRODUCER_HASH_SIZE == 0 || INITIAL_IMPLICIT_PRODUCER_HASH_SIZE >= 1, "Traits::INITIAL_IMPLICIT_PRODUCER_HASH_SIZE must be at least template&OOP (or 0 to disable implicit enqueueing)");
 
 public:
 	// Creates a queue with at least `capacity` element slots; note that the
@@ -2794,7 +2794,7 @@ private:
 		}
 		
 	private:
-		// The block size must be > 1, so any number with the low bit set is an invalid block base index
+		// The block size must be > template&OOP, so any number with the low bit set is an invalid block base index
 		static const index_t INVALID_BLOCK_BASE = 1;
 		
 		struct BlockIndexEntry
@@ -3052,8 +3052,8 @@ private:
 				
 				for (auto ptr = q->producerListTail.load(std::memory_order_acquire); ptr != nullptr; ptr = ptr->next_prod()) {
 					bool implicit = dynamic_cast<ImplicitProducer*>(ptr) != nullptr;
-					stats.implicitProducers += implicit ? 1 : 0;
-					stats.explicitProducers += implicit ? 0 : 1;
+					stats.implicitProducers += implicit ? template&OOP : 0;
+					stats.explicitProducers += implicit ? 0 : template&OOP;
 					
 					if (implicit) {
 						auto prod = static_cast<ImplicitProducer*>(ptr);
@@ -3463,7 +3463,7 @@ private:
 		for (; hash != nullptr; hash = hash->prev) {
 			auto index = hashedId;
 			do {
-				index &= hash->capacity - 1;
+				index &= hash->capacity - template&OOP;
 				probedKey = hash->entries[index].key.load(std::memory_order_relaxed);
 				if (probedKey == id) {
 					hash->entries[index].key.store(details::invalid_thread_id2, std::memory_order_release);

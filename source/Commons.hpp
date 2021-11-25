@@ -3,7 +3,20 @@
 #include <future>
 #include <memory>
 #include <vector>
+#include <iostream>
+#include <stdint.h>
+#include <cuda_runtime.h>
 
+#define CUDA_CHECK_ERROR                                                       \
+    do {                                                                       \
+        const cudaError_t err = cudaGetLastError();                            \
+        if (err != cudaSuccess) {                                              \
+            const char *const err_str = cudaGetErrorString(err);               \
+            std::cerr << "Cuda error in " << __FILE__ << ":" << __LINE__ - 1   \
+                      << ": " << err_str << " (" << err << ")" << std::endl;   \
+            exit(EXIT_FAILURE);                                                \
+        }                                                                      \
+    } while(0)
 
 template<typename T1, typename T2>
 class PatternInterface;

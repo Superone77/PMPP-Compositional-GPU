@@ -9,6 +9,7 @@
 
 template<typename T_input, typename T_output>
 class AlgorithmWrapper : public PatternInterface<T_input, T_output> {
+    //初始化一堆AlgorithmInterface指针
 	AlgoIntPtr<T_input, T_output> interface;
 
 	void InternallyCompute(std::future<T_input> future, std::promise<T_output> promise) override {
