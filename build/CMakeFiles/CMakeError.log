@@ -1,22 +1,63 @@
-Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
-Compiler: /Library/Developer/CommandLineTools/usr/bin/cc 
-Build flags: 
-Id flags:  
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles/CMakeTmp
 
-The output was:
-1
-ld: library not found for -lSystem
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
+Run Build Command(s):/usr/bin/make cmTC_4c036/fast && /usr/bin/make -f CMakeFiles/cmTC_4c036.dir/build.make CMakeFiles/cmTC_4c036.dir/build
+make[1]: Entering directory '/gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_4c036.dir/src.cxx.o
+/usr/bin/c++    -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_4c036.dir/src.cxx.o -c /gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_4c036
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4c036.dir/link.txt --verbose=1
+/usr/bin/c++   -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_4c036.dir/src.cxx.o  -o cmTC_4c036 
+CMakeFiles/cmTC_4c036.dir/src.cxx.o: In function `main':
+src.cxx:(.text+0x3e): undefined reference to `pthread_create'
+src.cxx:(.text+0x4a): undefined reference to `pthread_detach'
+src.cxx:(.text+0x5b): undefined reference to `pthread_join'
+src.cxx:(.text+0x6f): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_4c036.dir/build.make:86: recipe for target 'cmTC_4c036' failed
+make[1]: *** [cmTC_4c036] Error 1
+make[1]: Leaving directory '/gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_4c036/fast' failed
+make: *** [cmTC_4c036/fast] Error 2
 
 
-Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
-Compiler: /Library/Developer/CommandLineTools/usr/bin/c++ 
-Build flags: 
-Id flags:  
+Source file was:
+#include <pthread.h>
 
-The output was:
-1
-ld: library not found for -lc++
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e3c22/fast && /usr/bin/make -f CMakeFiles/cmTC_e3c22.dir/build.make CMakeFiles/cmTC_e3c22.dir/build
+make[1]: Entering directory '/gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_e3c22.dir/CheckFunctionExists.cxx.o
+/usr/bin/c++    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e3c22.dir/CheckFunctionExists.cxx.o -c /gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_e3c22
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e3c22.dir/link.txt --verbose=1
+/usr/bin/c++   -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_e3c22.dir/CheckFunctionExists.cxx.o  -o cmTC_e3c22 -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_e3c22.dir/build.make:86: recipe for target 'cmTC_e3c22' failed
+make[1]: *** [cmTC_e3c22] Error 1
+make[1]: Leaving directory '/gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_e3c22/fast' failed
+make: *** [cmTC_e3c22/fast] Error 2
+
 
 

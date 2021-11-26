@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(app)
+project(app CXX CUDA)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -14,7 +14,8 @@ include_directories("${CUDA_INCLUDE_DIRS}")
 #add_compile_definitions(_ENABLE_ATOMIC_ALIGNMENT_FIX)
 
 file(GLOB_RECURSE TOP_INCS "source/*.hpp" "source/*.h")
-file(GLOB_RECURSE ALG_INCS "source/algorithms/*.hpp" "source/algorithms/*.h" "source/algorithms/*.cpp" "source/algorithms/*.c","source/algorithms/*.cu")
+file(GLOB_RECURSE ALG_INCS "source/algorithms/*.hpp" "source/algorithms/*.cpp" "source/algorithms/*.c" )
+file(GLOB_RECURSE GPU_INCS "source/algorithms/*.cu")
 file(GLOB_RECURSE INT_INCS "source/interfaces/*.hpp" "source/interfaces/*.h" "source/interfaces/*.cpp" "source/interfaces/*.c")
 file(GLOB_RECURSE PAT_INCS "source/pattern/*.hpp" "source/pattern/*.h" "source/pattern/*.cpp" "source/pattern/*.c")
 file(GLOB_RECURSE HEL_INCS "source/helper/*.hpp" "source/helper/*.h" "source/helper/*.cpp" "source/helper/*.c")
@@ -27,14 +28,15 @@ source_group("helper" FILES ${HEL_INCS})
 source_group("tests" FILES ${TST_INCS})
 
 add_executable(app
-	source/main.cpp
-	${TOP_INCS}
-	${ALG_INCS}
-	${INT_INCS}
-	${PAT_INCS}
-	${HEL_INCS}
-	${TST_INCS}
-)
+		source/main.cpp
+		${TOP_INCS}
+		${ALG_INCS}
+		${GPU_INCS}
+		${INT_INCS}
+		${PAT_INCS}
+		${HEL_INCS}
+		${TST_INCS}
+		)
 
 target_link_libraries (app ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(app ${CUDA_LIBRARIES})

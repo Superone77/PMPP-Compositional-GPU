@@ -6,7 +6,7 @@
 #include "algorithms/Increaser.hpp"
 #include "algorithms/Nopper.hpp"
 #include "algorithms/QuickSorter.hpp"
-#include "algorithms/Nop_GPU.cu"
+#include "algorithms/Nop_GPU.h"
 #include "interfaces/AlgorithmWrapper.hpp"
 
 #include "pattern/TaskPool.hpp"
