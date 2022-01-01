@@ -63,6 +63,8 @@ CMakeFiles/app.dir/source/algorithms/gpuCommon.cu.o: /usr/local/cuda/include/vec
 
 CMakeFiles/app.dir/source/main.cpp.o: ../source/Commons.hpp
 CMakeFiles/app.dir/source/main.cpp.o: ../source/algorithms/Increaser.hpp
+CMakeFiles/app.dir/source/main.cpp.o: ../source/algorithms/Max_GPU.hpp
+CMakeFiles/app.dir/source/main.cpp.o: ../source/algorithms/Min_GPU.hpp
 CMakeFiles/app.dir/source/main.cpp.o: ../source/algorithms/Nop_GPU.h
 CMakeFiles/app.dir/source/main.cpp.o: ../source/algorithms/Nopper.hpp
 CMakeFiles/app.dir/source/main.cpp.o: ../source/algorithms/QuickSorter.hpp

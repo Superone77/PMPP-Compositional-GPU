@@ -43,10 +43,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /gris/gris-f/homelv/wayang/pmpp-yang-he
+CMAKE_SOURCE_DIR = /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /gris/gris-f/homelv/wayang/pmpp-yang-he/build
+CMAKE_BINARY_DIR = /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/app.dir/depend.make
@@ -59,21 +59,21 @@ include CMakeFiles/app.dir/flags.make
 
 CMakeFiles/app.dir/source/main.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/source/main.cpp.o: ../source/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app.dir/source/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/source/main.cpp.o -c /gris/gris-f/homelv/wayang/pmpp-yang-he/source/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/app.dir/source/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/source/main.cpp.o -c /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/main.cpp
 
 CMakeFiles/app.dir/source/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/source/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /gris/gris-f/homelv/wayang/pmpp-yang-he/source/main.cpp > CMakeFiles/app.dir/source/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/main.cpp > CMakeFiles/app.dir/source/main.cpp.i
 
 CMakeFiles/app.dir/source/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/source/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /gris/gris-f/homelv/wayang/pmpp-yang-he/source/main.cpp -o CMakeFiles/app.dir/source/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/main.cpp -o CMakeFiles/app.dir/source/main.cpp.s
 
 CMakeFiles/app.dir/source/algorithms/Nop_GPU.cu.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/source/algorithms/Nop_GPU.cu.o: ../source/algorithms/Nop_GPU.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CUDA object CMakeFiles/app.dir/source/algorithms/Nop_GPU.cu.o"
-	/usr/local/cuda/bin/nvcc  $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -c /gris/gris-f/homelv/wayang/pmpp-yang-he/source/algorithms/Nop_GPU.cu -o CMakeFiles/app.dir/source/algorithms/Nop_GPU.cu.o
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CUDA object CMakeFiles/app.dir/source/algorithms/Nop_GPU.cu.o"
+	/usr/local/cuda/bin/nvcc  $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -c /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/algorithms/Nop_GPU.cu -o CMakeFiles/app.dir/source/algorithms/Nop_GPU.cu.o
 
 CMakeFiles/app.dir/source/algorithms/Nop_GPU.cu.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/app.dir/source/algorithms/Nop_GPU.cu.i"
@@ -85,8 +85,8 @@ CMakeFiles/app.dir/source/algorithms/Nop_GPU.cu.s: cmake_force
 
 CMakeFiles/app.dir/source/algorithms/gpuCommon.cu.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/source/algorithms/gpuCommon.cu.o: ../source/algorithms/gpuCommon.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/app.dir/source/algorithms/gpuCommon.cu.o"
-	/usr/local/cuda/bin/nvcc  $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -c /gris/gris-f/homelv/wayang/pmpp-yang-he/source/algorithms/gpuCommon.cu -o CMakeFiles/app.dir/source/algorithms/gpuCommon.cu.o
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CUDA object CMakeFiles/app.dir/source/algorithms/gpuCommon.cu.o"
+	/usr/local/cuda/bin/nvcc  $(CUDA_DEFINES) $(CUDA_INCLUDES) $(CUDA_FLAGS) -x cu -c /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/algorithms/gpuCommon.cu -o CMakeFiles/app.dir/source/algorithms/gpuCommon.cu.o
 
 CMakeFiles/app.dir/source/algorithms/gpuCommon.cu.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CUDA source to CMakeFiles/app.dir/source/algorithms/gpuCommon.cu.i"
@@ -114,7 +114,7 @@ app: /usr/lib/x86_64-linux-gnu/librt.so
 app: /usr/local/cuda/lib64/libcudart_static.a
 app: /usr/lib/x86_64-linux-gnu/librt.so
 app: CMakeFiles/app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -127,6 +127,6 @@ CMakeFiles/app.dir/clean:
 .PHONY : CMakeFiles/app.dir/clean
 
 CMakeFiles/app.dir/depend:
-	cd /gris/gris-f/homelv/wayang/pmpp-yang-he/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /gris/gris-f/homelv/wayang/pmpp-yang-he /gris/gris-f/homelv/wayang/pmpp-yang-he /gris/gris-f/homelv/wayang/pmpp-yang-he/build /gris/gris-f/homelv/wayang/pmpp-yang-he/build /gris/gris-f/homelv/wayang/pmpp-yang-he/build/CMakeFiles/app.dir/DependInfo.cmake --color=$(COLOR)
+	cd /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build /gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build/CMakeFiles/app.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/app.dir/depend
 

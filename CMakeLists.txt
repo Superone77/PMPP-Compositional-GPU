@@ -13,9 +13,9 @@ include_directories("${CUDA_INCLUDE_DIRS}")
 
 #add_compile_definitions(_ENABLE_ATOMIC_ALIGNMENT_FIX)
 
-file(GLOB_RECURSE TOP_INCS "source/*.hpp" "source/*.h")
+file(GLOB_RECURSE TOP_INCS "source/*.hpp")
 file(GLOB_RECURSE ALG_INCS "source/algorithms/*.hpp" "source/algorithms/*.cpp" "source/algorithms/*.c" )
-file(GLOB_RECURSE GPU_INCS "source/algorithms/*.cu")
+file(GLOB_RECURSE GPU_INCS "source/algorithms/*.cu" "source/*.h")
 file(GLOB_RECURSE INT_INCS "source/interfaces/*.hpp" "source/interfaces/*.h" "source/interfaces/*.cpp" "source/interfaces/*.c")
 file(GLOB_RECURSE PAT_INCS "source/pattern/*.hpp" "source/pattern/*.h" "source/pattern/*.cpp" "source/pattern/*.c")
 file(GLOB_RECURSE HEL_INCS "source/helper/*.hpp" "source/helper/*.h" "source/helper/*.cpp" "source/helper/*.c")

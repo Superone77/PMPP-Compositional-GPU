@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/gris/gris-f/homelv/wayang/pmpp-yang-he/source/Commons.hpp
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/Commons.hpp
 future
 -
 memory
@@ -20,19 +20,23 @@ stdint.h
 cuda_runtime.h
 -
 
-/gris/gris-f/homelv/wayang/pmpp-yang-he/source/algorithms/Nop_GPU.cu
-
-/gris/gris-f/homelv/wayang/pmpp-yang-he/source/algorithms/gpuCommon.cu
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/algorithms/gpuCommon.cu
 cuda_runtime.h
 -
 device_launch_parameters.h
 -
+vector
+-
+iostream
+-
 gpuCommon.h
-/gris/gris-f/homelv/wayang/pmpp-yang-he/source/algorithms/gpuCommon.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/algorithms/gpuCommon.h
 
-/gris/gris-f/homelv/wayang/pmpp-yang-he/source/algorithms/gpuCommon.h
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/algorithms/gpuCommon.h
 ../Commons.hpp
-/gris/gris-f/homelv/wayang/pmpp-yang-he/source/Commons.hpp
+/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/source/Commons.hpp
+vector
+-
 
 /usr/local/cuda/include/builtin_types.h
 device_types.h

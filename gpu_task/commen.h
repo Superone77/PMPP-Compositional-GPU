@@ -5,16 +5,7 @@
 #include <cuda_runtime.h>
 #define TIME_TEST 0
 
-#define CUDA_CHECK_ERROR                                                       \
-    do {                                                                       \
-        const cudaError_t err = cudaGetLastError();                            \
-        if (err != cudaSuccess) {                                              \
-            const char *const err_str = cudaGetErrorString(err);               \
-            std::cerr << "Cuda error in " << __FILE__ << ":" << __LINE__ - 1   \
-                      << ": " << err_str << " (" << err << ")" << std::endl;   \
-            exit(EXIT_FAILURE);                                                \
-        }                                                                      \
-    } while(0)
+
 //#define TIME_TEST_FIRST
 //{
 //cudaEvent_t evStart, evStop;
