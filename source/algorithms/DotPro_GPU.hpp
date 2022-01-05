@@ -13,8 +13,8 @@ class DotPro_GPU:public AlgorithmInterface<std::vector<T>, T>{
 public:
     DotPro_GPU() = default;
 
-    DotPro_GPU(Max_GPU& other) = default;
-    DotPro_GPU(Max_GPU&& other) = default;
+    DotPro_GPU(DotPro_GPU& other) = default;
+    DotPro_GPU(DotPro_GPU&& other) = default;
 
     DotPro_GPU& operator=(const DotPro_GPU& other) = default;
     DotPro_GPU& operator=(DotPro_GPU&& other) = default;

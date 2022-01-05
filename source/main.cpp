@@ -9,6 +9,7 @@
 #include "algorithms/Nop_GPU.h"
 #include "algorithms/Min_GPU.hpp"
 #include "algorithms/Max_GPU.hpp"
+#include "algorithms/DotPro_GPU.hpp"
 #include "interfaces/AlgorithmWrapper.hpp"
 
 #include "pattern/TaskPool.hpp"
@@ -115,12 +116,13 @@ void test2(PatIntPtr<std::vector<int>, int> s_ptr)
 
 	s_ptr->Dispose();
 }
+void test3(PatIntPtr<std::vector<int>, int> s_ptr)
 
 int main(int argument_count, char **arguments)
 {
 	{
-		auto max = std::make_shared<Max_GPU<int>>();
-		auto max_w = AlgorithmWrapper<std::vector<int>, int>::create(max);
+		auto max = std::make_shared<DotPro_GPU<int>>();
+		auto max_w = AlgorithmWrapper<<std::vector<int>,std::vector<int>>, int>::create(max);
 
 		auto qs = std::make_shared<QuickSorter<int>>();
 		auto qs_w = AlgorithmWrapper<std::vector<int>, std::vector<int>>::create(qs);
@@ -136,7 +138,7 @@ int main(int argument_count, char **arguments)
 
 		auto comp = Composition<std::vector<int>, std::vector<int>, int>::create(tp, tp2);
 
-		test2(comp);
+//		test2(comp);
 	}
 	std::cout << "Finished" << std::endl;
 
