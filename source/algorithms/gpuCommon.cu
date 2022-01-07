@@ -4,8 +4,8 @@
 #include <iostream>
 #include "gpuCommon.h"
 
-const int threadsPerBlock=2;
-const int N = 10;
+const int threadsPerBlock=16;
+const int N = 100;
 const int blocksPerGrid = (N + threadsPerBlock -1) / threadsPerBlock;
 
 #define CUDA_CHECK_ERROR                                                       \

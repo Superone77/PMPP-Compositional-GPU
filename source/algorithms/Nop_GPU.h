@@ -10,7 +10,7 @@
 
 
 template<typename T>
-class Nop_GPU:public AlgorithmInterface<std::vector<T>, std::vector<T>>{
+class Nop_GPU:public AlgorithmInterface<T, T>{
 public:
     Nop_GPU() = default;
 
@@ -21,9 +21,9 @@ public:
     Nop_GPU& operator=(Nop_GPU&& other) = default;
     virtual ~Nop_GPU() = default;
 
-    std::vector<T> Compute(std::vector<T>&& vector) const override{
+    T Compute(T&& num) const override{
         nop_run();
-        return std::move(vector);
+        return std::move(num);
     }
 
     std::string Name() const override {
