@@ -4,6 +4,7 @@
 #include <thread>
 #include <memory>
 #include <vector>
+#include <numeric>
 
 #include "algorithms/Increaser.hpp"
 #include "algorithms/Nopper.hpp"
@@ -22,6 +23,9 @@
 #include "pattern/ForkJoin.hpp"
 #include "helper/Comparator.hpp"
 
+const int repeats = 100;
+const int size = 10;//size must equal to N in gpuCommon.cu
+
 void testMax(PatIntPtr<std::vector<int>, int> s_ptr)
 {
 	auto create = [](int size) {
@@ -37,9 +41,6 @@ void testMax(PatIntPtr<std::vector<int>, int> s_ptr)
 	};
 
 	std::cout << "Testing: " << s_ptr->Name() << std::endl;
-
-	const auto repeats = 100;
-	const auto size = 10;
 
 	std::vector<std::future<std::vector<int>>> inputs;
 	std::vector<std::future<int>> outputs;
@@ -91,8 +92,6 @@ void testMin(PatIntPtr<std::vector<int>, int> s_ptr)
 
 	std::cout << "Testing: " << s_ptr->Name() << std::endl;
 
-	const auto repeats = 100;
-	const auto size = 10;
 
 	std::vector<std::future<std::vector<int>>> inputs;
 	std::vector<std::future<int>> outputs;
@@ -145,8 +144,6 @@ void testNop(PatIntPtr<std::vector<int>, std::vector<int>> s_ptr)
 
 	std::cout << "Testing: " << s_ptr->Name() << std::endl;
 
-	const auto repeats = 100;
-	const auto size = 10;
 
 	std::vector<std::future<std::vector<int>>> inputs;
 	std::vector<std::future<std::vector<int>>> outputs;
@@ -168,7 +165,69 @@ void testNop(PatIntPtr<std::vector<int>, std::vector<int>> s_ptr)
 	std::cout<<"Test finding Nop successfully"<<std::endl;
 }
 
+int randNum(){
+	return 0+rand()%100;
+}
+void testDotPro(PatIntPtr<std::pair<std::vector<int>, std::vector<int>>, int> s_ptr)
+{
+	auto create = [](int size) {
+		auto vec = std::vector<int>(size);
+		std::generate(vec.begin(), vec.end(), randNum);
+		return vec;
+	};
 
+	auto wrap = [](std::pair<std::vector<int>, std::vector<int>> pair) {
+		std::promise<std::pair<std::vector<int>, std::vector<int>>> prom;
+		prom.set_value(std::move(pair));
+		return prom.get_future();
+	};
+
+	std::cout << "Testing: " << s_ptr->Name() << std::endl;
+
+
+	std::vector<std::future<std::pair<std::vector<int>, std::vector<int>>>> inputs;
+	std::vector<std::future<int>> outputs;
+	std::vector<int> validation;
+
+	for (auto i = 0; i < repeats; i++)
+	{
+		auto vec1 = create(size);
+//		for (auto i : vec1)
+//			std::cout << i << ' ';
+//		std::cout<<std::endl;
+		auto vec2 = create(size);
+//		for (auto i : vec2)
+//			std::cout << i << ' ';
+//		std::cout<<std::endl;
+		int dot_product = inner_product(vec1.begin(), vec1.end(), vec2.begin(), 0);
+		validation.emplace_back(dot_product);
+		std::pair<std::vector<int>, std::vector<int>> pair = {vec1, vec2};
+		auto wrapped = std::move(wrap(std::move(pair)));
+		inputs.emplace_back(std::move(wrapped));
+	}
+
+	s_ptr->Init();
+
+	for (auto i = 0; i < repeats; i++)
+	{
+		outputs.emplace_back(std::move(s_ptr->Compute(std::move(inputs[i]))));
+	}
+
+	for (auto i = 0; i < repeats; i++)
+	{
+		auto &output = outputs[i];
+		auto val = output.get();
+		if(val != validation[i]){
+			std::cout<<"In "<< i<<". test "<<val<<" and "<<validation[i]<<std::endl;
+			std::cout<<"Scalar Product false"<<std::endl;
+			return;
+		}
+	}
+
+	s_ptr->Dispose();
+	std::cout<<"Test scalar product successfully"<<std::endl;
+
+}
 
 int main(int argument_count, char **arguments)
 {
@@ -191,19 +250,23 @@ int main(int argument_count, char **arguments)
 //		auto comp = Composition<std::vector<int>, std::vector<int>, int>::create(tp, tp2);
 //
 ////		test2(comp);
+		auto nop = std::make_shared<Nop_GPU<int>>();
+		auto nop_w = AlgorithmWrapper<std::vector<int>, std::vector<int>>::create(nop);
 		auto max = std::make_shared<Max_GPU<int>>();
 		auto max_w = AlgorithmWrapper<std::vector<int>, int>::create(max);
 		auto min = std::make_shared<Min_GPU<int>>();
 		auto min_w = AlgorithmWrapper<std::vector<int>, int>::create(min);
+		auto dot_pro = std::make_shared<DotPro_GPU<int>>();
+		auto dot_pro_w = AlgorithmWrapper<std::pair<std::vector<int>, std::vector<int>>, int>::create(dot_pro);
 		const auto num_threads_1 = 2;
+		auto tp_nop = TaskPool<std::vector<int>, std::vector<int>>::create(nop_w, num_threads_1);
 		auto tp_max = TaskPool<std::vector<int>, int>::create(max_w, num_threads_1);
 		auto tp_min = TaskPool<std::vector<int>, int>::create(min_w, num_threads_1);
+		auto tp_dot_pro = TaskPool<std::pair<std::vector<int>, std::vector<int>>, int>::create(dot_pro_w,num_threads_1);
+		testNop(tp_nop);
 		testMax(tp_max);
 		testMin(tp_min);
-		auto nop = std::make_shared<Nop_GPU<int>>();
-		auto nop_w = AlgorithmWrapper<std::vector<int>, std::vector<int>>::create(nop);
-		auto tp_nop = TaskPool<std::vector<int>, std::vector<int>>::create(nop_w, num_threads_1);
-		testNop(tp_nop);
+		testDotPro(tp_dot_pro);
 //		auto dot = std::make_shared<DotPro_GPU<int>>();
 //		auto dot_w = AlgorithmWrapper<std::vector<int>, int>::create(dot);
 //		auto tp_dot = TaskPool<std::vector<int>, int>::create(dot_w, num_threads_1);

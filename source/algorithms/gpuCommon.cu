@@ -202,14 +202,12 @@ T dot_product_run(std::vector<T> &vec1, std::vector<T> &vec2){
     cudaMemcpy(A, a, sz, cudaMemcpyHostToDevice);
     cudaMemcpy(B, b, sz, cudaMemcpyHostToDevice);
 
-    dim3 blocks(N/256);
-    dim3 threads(256);
-    dot2<<<blocks, threads>>>(A, B, C);
+    dot2<<<blocksPerGrid,threadsPerBlock>>>(A, B, C);
 
     cudaMemcpy(c, C, sz, cudaMemcpyDeviceToHost);
 
     T sum_c = 0;
-    for (int i=0; i<256; i++)
+    for (int i=0; i<N; i++)
     {
         sum_c += c[i];
     }

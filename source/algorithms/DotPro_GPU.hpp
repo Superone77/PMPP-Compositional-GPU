@@ -9,7 +9,7 @@
 #include <string>
 
 template<typename T>
-class DotPro_GPU:public AlgorithmInterface<std::vector<T>, T>{
+class DotPro_GPU:public AlgorithmInterface<std::pair<std::vector<T>,std::vector<T>>, int>{
 public:
     DotPro_GPU() = default;
 
@@ -20,8 +20,8 @@ public:
     DotPro_GPU& operator=(DotPro_GPU&& other) = default;
     virtual ~DotPro_GPU() = default;
 
-    T Compute(std::vector<T>&& vec1,std::vector<T>&& vec2) const override{
-        T&& res = dot_product_run(vec1,vec2);
+    T Compute(std::pair<std::vector<T>,std::vector<T>>&& vec) const override{
+        T&& res = dot_product_run(vec.first,vec.second);
         return std::move(res);
     }
 
