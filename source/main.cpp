@@ -9,6 +9,10 @@
 
 #include "algorithms/Increaser.hpp"
 #include "algorithms/Nopper.hpp"
+#include "algorithms/Reorderer.hpp"
+#include "algorithms/ReduceAdd.hpp"
+#include "algorithms/ReduceMin.hpp"
+#include "algorithms/SelectionSorter.hpp"
 #include "algorithms/QuickSorter.hpp"
 #include "algorithms/Nop_GPU.h"
 #include "algorithms/Min_GPU.hpp"
@@ -27,7 +31,7 @@
 using namespace std::chrono;
 const int test_repeats = 100;
 const int repeats = 10000;
-const int size = 100;//size must equal to N in gpuCommon.cu
+const int size = 10000;//size must equal to N in gpuCommon.cu
 
 int randNum() {
     return 0 + rand() % 100;
@@ -410,6 +414,51 @@ void timer4(PatIntPtr<std::vector<int>, std::vector<int>> s_ptr) {
               << " sec" << std::endl;
 }
 
+void timer5(PatIntPtr<std::tuple<int, int>, int> s_ptr) {
+    auto wrap = [](std::tuple<int,int> tuple) {
+        std::promise <std::tuple<int,int>> prom;
+        prom.set_value(std::move(tuple));
+        return prom.get_future();
+    };
+
+    std::cout << "Testing Time of : " << s_ptr->Name() << std::endl;
+    std::cout << "repeats: " << repeats << std::endl;
+    std::cout << "size: " << size << std::endl;
+
+
+
+    std::vector < std::future < std::tuple<int,int>>> inputs;
+    std::vector <std::future<int>> outputs;
+
+    for (auto i = 0; i < repeats; i++) {
+        int i1 = rand();
+        int i2 = rand();
+        auto tuple = std::make_tuple(i1,i2);
+        auto wrapped = std::move(wrap(std::move(tuple)));
+        inputs.emplace_back(std::move(wrapped));
+    }
+    auto start = system_clock::now();
+    s_ptr->Init();
+
+
+    for (auto i = 0; i < repeats; i++) {
+        outputs.emplace_back(std::move(s_ptr->Compute(std::move(inputs[i]))));
+    }
+
+
+    for (auto i = 0; i < repeats; i++) {
+        auto &output = outputs[i];
+        auto val = output.get();
+    }
+
+    s_ptr->Dispose();
+    auto end = system_clock::now();
+    auto duration = duration_cast<microseconds>(end - start);
+    std::cout << "average time of " << s_ptr->Name() << " is "
+              << (double(duration.count()) * microseconds::period::num / microseconds::period::den) / repeats
+              << " sec" << std::endl;
+}
+
 int main(int argument_count, char **arguments) {
     {
         const auto num_threads_1 = 1;
@@ -435,6 +484,28 @@ int main(int argument_count, char **arguments) {
 		auto inc = std::make_shared<Increaser<int>>();
 		auto inc_w = AlgorithmWrapper<std::vector<int>, std::vector<int>>::create(inc);
         auto tp_qs = TaskPool<std::vector<int>, std::vector<int>>::create(qs_w,num_threads_2);
+        auto tp_inc = TaskPool<std::vector<int>, std::vector<int>>::create(inc_w,num_threads_2);
+
+        auto nopper = std::make_shared < Nopper < int >> ();
+        auto nopper_w = AlgorithmWrapper<int, int>::create(nopper);
+        auto tp_nopper = TaskPool<int, int>::create(nopper_w, num_threads_2);
+
+        auto ro = std::make_shared < Reorderer < int >> ();
+        auto ro_w = AlgorithmWrapper<std::vector < int >,std::vector < int >>::create(ro);
+        auto tp_ro = TaskPool< std::vector < int >,std::vector < int > >::create(ro_w, num_threads_2);
+
+        auto ss = std::make_shared < SelectionSorter < int >> ();
+        auto ss_w = AlgorithmWrapper<std::vector < int >,std::vector < int >>::create(ss);
+        auto tp_ss = TaskPool< std::vector < int >,std::vector < int > >::create(ss_w, num_threads_2);
+
+        auto ra = std::make_shared < ReduceAddVector < int >> ();
+        auto ra_w = AlgorithmWrapper < std::vector < int >,int > ::create(ra);
+        auto tp_ra = TaskPool < std::vector < int >,int > ::create(ra_w, num_threads_2);
+
+        auto rm = std::make_shared < ReduceMin < int,int >> ();
+        auto rm_w = AlgorithmWrapper < std::tuple < int,int >,int > ::create(rm);
+        auto tp_rm = TaskPool < std::tuple < int,int >,int > ::create(rm_w, num_threads_2);
+
 
 
 //test
@@ -444,12 +515,17 @@ int main(int argument_count, char **arguments) {
 //		testDotPro(tp_dot_pro);
 
 //timer for single function
-//		timer1(tp_nop);
+ //   timer1(tp_nop);
 //      timer2(tp_min);
 //      timer2(tp_max);
-	  //timer3(tp_dot_pro);
-      timer4(tp_qs);
-
+//	  timer3(tp_dot_pro);
+//        timer4(tp_qs);
+//      timer4(tp_inc);
+//        timer1(tp_nopper);
+ //       timer4(tp_ro);
+ //       timer4(tp_ss);
+ //       timer2(tp_ra);
+        timer5(tp_rm);
 //timer for composition
 //TODO
 
