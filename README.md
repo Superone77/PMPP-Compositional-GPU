@@ -12,7 +12,7 @@ Record Table
 |I|Increaser|2.2273e-06 sec/1.9257e-06 sec/1.8722e-06 sec/1.79621e-05 sec|
 |QS|QuickSorter|2.0591e-06 sec/1.6206e-06 sec/7.84031e-05 sec/6.2228e-04 sec|
 |RA|ReduceAdd|2.5477e-06 sec/3.495e-06 sec/1.84241e-05 sec/1.25739e-04 sec|
-|RM|ReduceMin|2.031e-06 sec/2.3293e-06 sec/2.3133e-06 sec/2.0059e-06 sec|
+|RM|ReduceMin|2.031e-06 sec|
 |RO|Reorderer|1.7526e-06 sec/2.4009e-06 sec/6.80051e-05 sec/4.78822e-04 sec|
 |SS|SelectionSorter|2.121e-06 sec/2.0785e-06 sec/4.50931e-03 sec/8.00362e-02 sec|
 
