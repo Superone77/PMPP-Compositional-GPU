@@ -29,9 +29,9 @@
 #include "helper/Comparator.hpp"
 
 using namespace std::chrono;
-const int test_repeats = 100;
+const int test_repeats = 1;
 const int repeats = 10000;
-const int size = 10000;//size must equal to N in gpuCommon.cu
+const int size = 10;//size must equal to N in gpuCommon.cu
 
 int randNum() {
     return 0 + rand() % 100;
@@ -121,7 +121,8 @@ void testMin(PatIntPtr<std::vector<int>, int> s_ptr) {
         auto &output = outputs[i];
         auto val = output.get();
         if (val != validation[i]) {
-            std::cout << "Find Min element false" << std::endl;
+            std::cout<<std::endl;
+            std::cout <<val<<" "<<validation[i]<<" "<< "Find Min element false" << std::endl;
             return;
         }
     }
@@ -510,9 +511,9 @@ int main(int argument_count, char **arguments) {
 
 //test
 //		testNop(tp_nop);
-//		testMax(tp_max);
-//		testMin(tp_min);
-//		testDotPro(tp_dot_pro);
+		testMax(tp_max);
+		testMin(tp_min);
+		testDotPro(tp_dot_pro);
 
 //timer for single function
  //   timer1(tp_nop);
@@ -525,7 +526,7 @@ int main(int argument_count, char **arguments) {
  //       timer4(tp_ro);
  //       timer4(tp_ss);
  //       timer2(tp_ra);
-        timer5(tp_rm);
+     //   timer5(tp_rm);
 //timer for composition
 //TODO
 

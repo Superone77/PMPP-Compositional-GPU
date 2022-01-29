@@ -5,7 +5,7 @@
 #include "gpuCommon.h"
 
 const int threadsPerBlock=16;
-const int N = 100;
+const int N = 10;
 const int blocksPerGrid = (N + threadsPerBlock -1) / threadsPerBlock;
 
 #define CUDA_CHECK_ERROR                                                       \
@@ -49,7 +49,7 @@ __global__ void ReductionMin(int *d_a, int *d_partial_min)
     //在共享存储器中进行规约
     for(int stride = 1; stride < blockDim.x; stride*=2)
     {
-        if(tid%(2*stride)==0) partialMin[tid] = partialMin[tid]>partialMin[tid+stride]?partialMin[tid+stride]:partialMin[tid];
+        if(tid%(2*stride)==0 && tid+stride<N) partialMin[tid] = partialMin[tid]>partialMin[tid+stride]?partialMin[tid+stride]:partialMin[tid];
         __syncthreads();
     }
     //将当前block的计算结果写回输出数组
@@ -90,6 +90,10 @@ T min_run(std::vector<T> &vector){
     int min=INT_MAX;
     for (int i=0; i < blocksPerGrid; ++i)  min= std::min(min, h_partial_min[i]);
     //printf("%d ", min);
+    cudaFree(d_a);
+    cudaFree(d_partial_min);
+    free(h_a);
+    free(h_partial_min);
     return std::move(min);
 }
 template int min_run(std::vector<int> &vector);
@@ -114,7 +118,7 @@ __global__ void ReductionMax(int *d_a, int *d_partial_max)
     //在共享存储器中进行规约
     for(int stride = 1; stride < blockDim.x; stride*=2)
     {
-        if(tid%(2*stride)==0) partialMax[tid] = partialMax[tid]<partialMax[tid+stride]?partialMax[tid+stride]:partialMax[tid];
+        if(tid%(2*stride)==0&& tid+stride<N) partialMax[tid] = partialMax[tid]<partialMax[tid+stride]?partialMax[tid+stride]:partialMax[tid];
         __syncthreads();
     }
     //将当前block的计算结果写回输出数组
@@ -155,6 +159,10 @@ T max_run(std::vector<T> &vector){
     int max=INT_MIN;
     for (int i=0; i < blocksPerGrid; ++i)  max= std::max(max, h_partial_max[i]);
     //printf("%d ", min);
+    cudaFree(d_a);
+    cudaFree(d_partial_max);
+    free(h_a);
+    free(h_partial_max);
     return std::move(max);
 }
 template int max_run(std::vector<int> &vector);
@@ -211,6 +219,12 @@ T dot_product_run(std::vector<T> &vec1, std::vector<T> &vec2){
     {
         sum_c += c[i];
     }
+    cudaFree(A);
+    cudaFree(B);
+    cudaFree(C);
+    free(a);
+    free(b);
+    free(c);
     return sum_c;
 
 }
