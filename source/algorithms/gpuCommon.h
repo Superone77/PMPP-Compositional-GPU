@@ -9,7 +9,6 @@
 extern "C"
 void nop_run();
 
-
 template<typename T>
 T min_run(std::vector<T> &vector);
 
@@ -18,5 +17,8 @@ T max_run(std::vector<T> &vector);
 
 template<typename T>
 T dot_product_run(std::vector<T> &vec1, std::vector<T> &vec2);
+
+template<typename T>
+std::vector<std::vector<T>> matrix_double_gpu(std::vector<std::vector<T>> &vec);
 
 #endif //EXERCISE_GPUCOMMON_H

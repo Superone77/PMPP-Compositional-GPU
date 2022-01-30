@@ -18,6 +18,7 @@
 #include "algorithms/Min_GPU.hpp"
 #include "algorithms/Max_GPU.hpp"
 #include "algorithms/DotPro_GPU.hpp"
+#include "algorithms/MatDouble_GPU.hpp"
 #include "interfaces/AlgorithmWrapper.hpp"
 
 #include "pattern/TaskPool.hpp"
@@ -29,9 +30,9 @@
 #include "helper/Comparator.hpp"
 
 using namespace std::chrono;
-const int test_repeats = 1;
-const int repeats = 10000;
-const int size = 10;//size must equal to N in gpuCommon.cu
+const int test_repeats = 100;
+const int repeats = 100;
+const int size = 1000;//size must equal to N in gpuCommon.cu
 
 int randNum() {
     return 0 + rand() % 100;
@@ -122,7 +123,7 @@ void testMin(PatIntPtr<std::vector<int>, int> s_ptr) {
         auto val = output.get();
         if (val != validation[i]) {
             std::cout<<std::endl;
-            std::cout <<val<<" "<<validation[i]<<" "<< "Find Min element false" << std::endl;
+            std::cout <<val<<" "<<validation[i]<<" "<<i<<" "<< "Find Min element false" << std::endl;
             return;
         }
     }
@@ -157,7 +158,7 @@ void testNop(PatIntPtr<int, int> s_ptr) {
         outputs.emplace_back(std::move(s_ptr->Compute(std::move(inputs[i]))));
     }
     s_ptr->Dispose();
-    std::cout << "Test finding Nop successfully" << std::endl;
+    std::cout << "Test Nop successfully" << std::endl;
 }
 
 
@@ -221,6 +222,76 @@ void testDotPro(PatIntPtr<std::pair<std::vector<int>, std::vector<int>>, int> s_
 	std::cout<<"Test scalar product successfully"<<std::endl;
 
 }
+void testMatDb(PatIntPtr<std::vector<std::vector<int>>, std::vector<std::vector<int>>> s_ptr)
+{
+    auto create = [](int size) {
+        auto res = std::vector<std::vector<int>>(size);
+        for(int i = 0;i<size;i++) {
+            auto vec = std::vector<int>(size);
+            std::generate(vec.begin(), vec.end(), rand);
+            res[i] = vec;
+        }
+        return res;
+    };
+
+    auto mat2double = [](std::vector<std::vector<int>> vec){
+        std::vector<std::vector<int>> res ;
+        for(int i = 0;i<size;i++){
+            std::vector<int> temp;
+            for(int j = 0;j<size;j++){
+                int num = vec[i][j]+vec[i][j];
+                temp.push_back(num);
+            }
+            res.push_back(temp);
+        }
+        return res;
+    };
+
+    auto wrap = [](std::vector<std::vector<int>> vec) {
+        std::promise<std::vector<std::vector<int>>> prom;
+        prom.set_value(std::move(vec));
+        return prom.get_future();
+    };
+
+    std::cout << "Testing: " << s_ptr->Name() << std::endl;
+
+
+    std::vector<std::future<std::vector<std::vector<int>>>> inputs;
+    std::vector<std::future<std::vector<std::vector<int>>>> outputs;
+    std::vector<std::vector<std::vector<int>>> validation;
+
+    for (auto i = 0; i < test_repeats; i++)
+    {
+        auto vec = create(size);
+        auto valid = mat2double(vec);
+        auto wrapped = std::move(wrap(std::move(vec)));
+        inputs.emplace_back(std::move(wrapped));
+        validation.emplace_back(valid);
+    }
+
+    s_ptr->Init();
+
+    for (auto i = 0; i < test_repeats; i++)
+    {
+        outputs.emplace_back(std::move(s_ptr->Compute(std::move(inputs[i]))));
+    }
+
+    for (auto i = 0; i < test_repeats; i++)
+    {
+        auto &output = outputs[i];
+        auto val = output.get();
+        auto validate = validation[i];
+        if(val[0][0] != validate[0][0] || val[size-1][size-1] != validate[size-1][size-1]){
+            std::cout<<"In "<< i<<". test "<<std::endl;
+            std::cout<<"MatDouble false"<<std::endl;
+            return;
+        }
+    }
+
+    s_ptr->Dispose();
+    std::cout<<"Test MatDouble GPU successfully"<<std::endl;
+}
+
 
 void timer1(PatIntPtr<int, int> s_ptr) {
 
@@ -459,6 +530,59 @@ void timer5(PatIntPtr<std::tuple<int, int>, int> s_ptr) {
               << (double(duration.count()) * microseconds::period::num / microseconds::period::den) / repeats
               << " sec" << std::endl;
 }
+void timer6(PatIntPtr<std::vector<std::vector<int>>, std::vector<std::vector<int>>> s_ptr)
+{
+    auto create = [](int size) {
+        auto res = std::vector<std::vector<int>>(size);
+        for(int i = 0;i<size;i++) {
+            auto vec = std::vector<int>(size);
+            std::generate(vec.begin(), vec.end(), rand);
+            res[i] = vec;
+        }
+        return res;
+    };
+
+    auto wrap = [](std::vector<std::vector<int>> vec) {
+        std::promise<std::vector<std::vector<int>>> prom;
+        prom.set_value(std::move(vec));
+        return prom.get_future();
+    };
+    std::cout << "Testing Time of : " << s_ptr->Name() << std::endl;
+    std::cout << "repeats: " << repeats << std::endl;
+    std::cout << "size: " << size << std::endl;
+
+    std::vector<std::future<std::vector<std::vector<int>>>> inputs;
+    std::vector<std::future<std::vector<std::vector<int>>>> outputs;
+
+    for (auto i = 0; i < repeats; i++)
+    {
+        auto vec = create(size);
+        auto wrapped = std::move(wrap(std::move(vec)));
+        inputs.emplace_back(std::move(wrapped));
+
+    }
+    auto start = system_clock::now();
+    s_ptr->Init();
+
+
+    for (auto i = 0; i < repeats; i++) {
+        outputs.emplace_back(std::move(s_ptr->Compute(std::move(inputs[i]))));
+    }
+
+
+    for (auto i = 0; i < repeats; i++) {
+        auto &output = outputs[i];
+        auto val = output.get();
+    }
+
+    s_ptr->Dispose();
+    auto end = system_clock::now();
+    auto duration = duration_cast<microseconds>(end - start);
+    std::cout << "average time of " << s_ptr->Name() << " is "
+              << (double(duration.count()) * microseconds::period::num / microseconds::period::den) / repeats
+              << " sec" << std::endl;
+
+}
 
 int main(int argument_count, char **arguments) {
     {
@@ -472,11 +596,15 @@ int main(int argument_count, char **arguments) {
         auto min_w = AlgorithmWrapper < std::vector < int >,int > ::create(min);
         auto dot_pro = std::make_shared < DotPro_GPU < int >> ();
         auto dot_pro_w = AlgorithmWrapper < std::pair < std::vector < int >, std::vector<int>>, int > ::create(dot_pro);
+        auto matdb_gpu = std::make_shared<MatDouble_GPU<int>>();
+        auto matdb_gpu_w = AlgorithmWrapper<std::vector<std::vector<int>>, std::vector<std::vector<int>>> ::create(matdb_gpu);
+
 
         auto tp_nop = TaskPool<int, int>::create(nop_w, num_threads_1);
         auto tp_max = TaskPool < std::vector < int >,int > ::create(max_w, num_threads_1);
         auto tp_min = TaskPool < std::vector < int >,int > ::create(min_w, num_threads_1);
         auto tp_dot_pro = TaskPool < std::pair < std::vector < int >, std::vector<int>>, int > ::create(dot_pro_w,num_threads_1);
+        auto tp_matdb_gpu = TaskPool<std::vector<std::vector<int>>, std::vector<std::vector<int>>>::create(matdb_gpu_w, num_threads_1);
 //CPU
 //TODO
         const auto num_threads_2 = 8;
@@ -511,9 +639,11 @@ int main(int argument_count, char **arguments) {
 
 //test
 //		testNop(tp_nop);
-		testMax(tp_max);
-		testMin(tp_min);
-		testDotPro(tp_dot_pro);
+//		testMax(tp_max);
+//		testMin(tp_min);
+//		testDotPro(tp_dot_pro);
+        //testMatDb(tp_matdb_gpu);
+
 
 //timer for single function
  //   timer1(tp_nop);
@@ -523,10 +653,11 @@ int main(int argument_count, char **arguments) {
 //        timer4(tp_qs);
 //      timer4(tp_inc);
 //        timer1(tp_nopper);
- //       timer4(tp_ro);
- //       timer4(tp_ss);
- //       timer2(tp_ra);
-     //   timer5(tp_rm);
+//        timer4(tp_ro);
+//        timer4(tp_ss);
+//        timer2(tp_ra);
+//        timer5(tp_rm);
+        timer6(tp_matdb_gpu);
 //timer for composition
 //TODO
 

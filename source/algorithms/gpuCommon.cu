@@ -2,11 +2,16 @@
 #include <device_launch_parameters.h>
 #include <vector>
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <sys/time.h>
+#include <limits>
 #include "gpuCommon.h"
 
-const int threadsPerBlock=16;
-const int N = 10;
-const int blocksPerGrid = (N + threadsPerBlock -1) / threadsPerBlock;
+
+const int N = 1000;
+using namespace std;
 
 #define CUDA_CHECK_ERROR                                                       \
     do {                                                                       \
@@ -18,6 +23,16 @@ const int blocksPerGrid = (N + threadsPerBlock -1) / threadsPerBlock;
             exit(EXIT_FAILURE);                                                \
         }                                                                      \
     } while(0)
+inline unsigned int div_up(unsigned int numerator, unsigned int denominator)
+{
+    unsigned int result = numerator / denominator;
+    if (numerator % denominator) ++result;
+    return result;
+}
+
+const int threadsPerBlock=16;
+
+const int blocksPerGrid = (N + threadsPerBlock -1) / threadsPerBlock;
 
 __global__ void nopKernel(){
     //just nop-kernel
@@ -49,7 +64,7 @@ __global__ void ReductionMin(int *d_a, int *d_partial_min)
     //在共享存储器中进行规约
     for(int stride = 1; stride < blockDim.x; stride*=2)
     {
-        if(tid%(2*stride)==0 && tid+stride<N) partialMin[tid] = partialMin[tid]>partialMin[tid+stride]?partialMin[tid+stride]:partialMin[tid];
+        if(tid%(2*stride)==0 && tid+stride<N && partialMin[tid+stride] != 0) partialMin[tid] = partialMin[tid]>partialMin[tid+stride]?partialMin[tid+stride]:partialMin[tid];
         __syncthreads();
     }
     //将当前block的计算结果写回输出数组
@@ -229,3 +244,57 @@ T dot_product_run(std::vector<T> &vec1, std::vector<T> &vec2){
 
 }
 template int dot_product_run(std::vector<int> &vec1, std::vector<int> &vec2);
+
+
+__global__ void MatDoubleKernel(int* Md, int* Pd) {
+    int bx = blockIdx.x; int by = blockIdx.y;
+    int tx = threadIdx.x; int ty = threadIdx.y;
+    int row = by * 1+ ty;
+    int col = bx *1 + tx;
+    int m_value = Md[row*N+col];
+    Pd[row*N+col]=2*m_value;
+}
+
+
+template<typename T>
+vector<vector<T>> matrix_double_gpu(vector<vector<T>> &vec)
+{
+    T* m;
+    T* p;
+
+    T* Md;
+    T* Pd;
+
+    int sz = N*N * sizeof(T);
+    m = (T*)malloc(sz);
+    p = (T*)malloc(sz);
+
+    cudaMalloc(&Md, sz);
+    cudaMalloc(&Pd, sz);
+
+    for(int i = 0;i<N;i++){
+        for(int j = 0;j<N;j++){
+            m[i*N+j] = vec[i][j];
+        }
+    }
+    cudaMemcpy(Md, m, sz, cudaMemcpyHostToDevice);
+
+    dim3 dimBlock(1, 1);
+    dim3 dimGrid(N,N);
+    MatDoubleKernel<<<dimGrid, dimBlock>>>(Md, Pd);
+
+    cudaMemcpy(p, Pd, sz, cudaMemcpyDeviceToHost);
+
+    for(int i = 0;i<N;i++){
+        for(int j = 0;j<N;j++){
+            vec[i][j] = p[i*N+j];
+        }
+    }
+    cudaFree(Pd);
+    cudaFree(Md);
+    free(m);
+    free(p);
+    return vec;
+}
+
+template vector<vector<int>> matrix_double_gpu(vector<vector<int>> &vec);
