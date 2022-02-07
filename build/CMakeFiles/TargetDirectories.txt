@@ -1,3 +1,0 @@
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build/CMakeFiles/rebuild_cache.dir
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build/CMakeFiles/app.dir
-/gris/gris-f/homelv/wayang/pmpp/pmpp-yang-he/build/CMakeFiles/edit_cache.dir

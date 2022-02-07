@@ -18,6 +18,7 @@
 #include "algorithms/Min_GPU.hpp"
 #include "algorithms/Max_GPU.hpp"
 #include "algorithms/DotPro_GPU.hpp"
+#include "algorithms/DotProSmVec_GPU.hpp"
 #include "algorithms/MatDouble_GPU.hpp"
 #include "interfaces/AlgorithmWrapper.hpp"
 
@@ -31,8 +32,8 @@
 
 using namespace std::chrono;
 const int test_repeats = 100;
-const int repeats = 100;
-const int size = 1000;//size must equal to N in gpuCommon.cu
+const int repeats = 1000;
+const int size = 10000;//size must equal to N in gpuCommon.cu
 
 int randNum() {
     return 0 + rand() % 100;
@@ -596,6 +597,8 @@ int main(int argument_count, char **arguments) {
         auto min_w = AlgorithmWrapper < std::vector < int >,int > ::create(min);
         auto dot_pro = std::make_shared < DotPro_GPU < int >> ();
         auto dot_pro_w = AlgorithmWrapper < std::pair < std::vector < int >, std::vector<int>>, int > ::create(dot_pro);
+        auto dot_pro_sv = std::make_shared<DotProSmVec_GPU<int>>();
+        auto dot_pro_sv_w = AlgorithmWrapper<std::vector<int>, int>::create(dot_pro_sv);
         auto matdb_gpu = std::make_shared<MatDouble_GPU<int>>();
         auto matdb_gpu_w = AlgorithmWrapper<std::vector<std::vector<int>>, std::vector<std::vector<int>>> ::create(matdb_gpu);
 
@@ -604,6 +607,7 @@ int main(int argument_count, char **arguments) {
         auto tp_max = TaskPool < std::vector < int >,int > ::create(max_w, num_threads_1);
         auto tp_min = TaskPool < std::vector < int >,int > ::create(min_w, num_threads_1);
         auto tp_dot_pro = TaskPool < std::pair < std::vector < int >, std::vector<int>>, int > ::create(dot_pro_w,num_threads_1);
+        auto tp_dot_pro_sv_w = TaskPool<std::vector<int>, int>::create(dot_pro_sv_w,num_threads_1);
         auto tp_matdb_gpu = TaskPool<std::vector<std::vector<int>>, std::vector<std::vector<int>>>::create(matdb_gpu_w, num_threads_1);
 //CPU
 //TODO
@@ -646,21 +650,33 @@ int main(int argument_count, char **arguments) {
 
 
 //timer for single function
- //   timer1(tp_nop);
-//      timer2(tp_min);
+        timer1(tp_nop);
+        timer1(tp_nop);
+ //       timer2(tp_min);
+
+//
 //      timer2(tp_max);
-//	  timer3(tp_dot_pro);
+	  timer2(tp_dot_pro_sv_w);
 //        timer4(tp_qs);
 //      timer4(tp_inc);
 //        timer1(tp_nopper);
 //        timer4(tp_ro);
-//        timer4(tp_ss);
+        timer4(tp_ss);
 //        timer2(tp_ra);
-//        timer5(tp_rm);
-        timer6(tp_matdb_gpu);
+ //      timer5(tp_rm);
+//        timer6(tp_matdb_gpu);
 //timer for composition
-//TODO
+//        auto comp1 = Composition<std::vector<int>, int, int>::create(tp_max, tp_nop); timer2(comp1);
+ //       auto comp2 = Composition<std::vector<int>, int, int>::create(tp_dot_pro_sv_w, tp_nop);timer2(comp2);
 
+//        auto comp3 = Composition<std::vector<int>, int, int>::create(tp_min, tp_nop); timer2(comp3);
+//        auto comp4 = Composition<int, int, int>::create(tp_nopper, tp_nop); timer1(comp4);
+//        auto comp5 = Composition<std::vector<int>, std::vector<int>, int>::create(tp_inc, tp_min);timer2(comp5);
+//        auto comp6 = Composition<std::vector<int>, std::vector<int>, int>::create(tp_qs, tp_max);timer2(comp6);
+//        auto comp7 = Composition<std::vector<int>, std::vector<int>, int>::create(tp_ss,tp_max);timer2(comp7);
+//        auto comp8 = Composition<std::vector<int>, std::vector<int>, int>::create(tp_ro, tp_dot_pro_sv_w);timer2(comp8);
+//       auto comp9 = Composition<std::tuple<int, int>, int,int>::create(tp_rm,tp_nop);timer5(comp9);
+        auto comp10 = Composition<std::vector<int>, std::vector<int>, int>::create(tp_ss,tp_dot_pro_sv_w);timer2(comp10);
 
     }
     std::cout << "Finished" << std::endl;
