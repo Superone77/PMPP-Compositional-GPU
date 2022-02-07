@@ -33,7 +33,7 @@ The reason might be that the functions are all parallel but the vector size is n
 ## 3. Time for Compositional GPU
 We measure the running time of different combinations, including, the combination of GPU and GPU functions, the combination of GPU and CPU functions.
 
-|function_A&function_B|size(vec_A)|size(vec_B)||time(A)/s|time(B)/s|time/s|
+|function_A&function_B|size(vec_A)|size(vec_B)|time(A)/s|time(B)/s|time/s|
 |---|---|---|---|---|---|---|
 |MAK+NK|10000|1|4.543e-04|6.06e-07 |4.640e-04|
 |SPK+NK|100|1|4.553e-04|6.06e-07|4.702e-04|
