@@ -45,6 +45,7 @@ We can observe that each function has a base time of similar duration, which we 
 As the new result we get, min kernel, max kernel and scalar product kernel have linear growth with size of vector, 
 
 ![MIK+MAK+SPK](myplot2.png)
+
 And matrix double kernel has super-linear growth with size of vector.
 
 ![MD](myplot1.png)
@@ -60,6 +61,7 @@ According to the data, we use least squares to get the estimation function of ve
 |MD|matrix_double_kernel|1.01828e-08 * x + 0.00032437|
 
 The fitting curves are as following:
+
 ![MIK+MAK+SPK](myplot3.png)
 ![MD](myplot4.png)
 
