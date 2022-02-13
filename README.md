@@ -55,10 +55,11 @@ According to the data, we use least squares to get the estimation function of ve
 
 |Flag|Function|function(s)|
 |---|---|---|
-|MIK|min-kernel|1.0473e-08 * x^2 + 2.1779e-05 * x - 0.0034685|
-|MAK|max-kernel|3.0286e-09 * x + 0.00036195|
-|SPK|scalarProduct-kernel|2.4106e-09 * x + 0.00058695|
-|MD|matrix_double_kernel|1.01828e-08 * x + 0.00032437|
+|MIK|min-kernel|3.0286e-09 * x + 0.00036195|
+|MAK|max-kernel|2.4106e-09 * x + 0.00058695|
+|SPK|scalarProduct-kernel|1.01828e-08 * x + 0.00032437|
+|MD|matrix_double_kernel|1.0473e-08 * x^2 + 2.1779e-05 * x - 0.0034685|
+
 
 The fitting curves are as following:
 
@@ -122,12 +123,6 @@ Prediction of unused size with model:
 
 
 
-
-
-
-
-
-
 ## 5. Problem found in experiments
 ### GPU initialization
 
@@ -151,3 +146,18 @@ average time of taskpool(1,Nop_GPU) is 6.06e-07 sec
 ```
 
 I guess the first timer always includes the time that initialization of GPU using.
+
+## 6. Conclusion
+
+For composition between GPU&CPU and between GPU&GPU,our experiments initially proved that
+
+C is a composition of A and B, so:    time(C) = time(A) + time(B)
+
+Further experiments preliminarily prove that if the functions A and B are linear functions:
+
+A is function F1 with input size V1, B is function F2 with input size V2 
+
+=> time(C) = size(V1)*time(F1)+size(V2)*time(F2)(+constant_base_time)
+
+So far, we have initially verified the application of compositional modeling on GPU.
+
