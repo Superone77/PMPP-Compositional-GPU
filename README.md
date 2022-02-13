@@ -1,5 +1,9 @@
 # PMPP Compositional GPU
 
+Reference: Fabian Czappa, Alexandru Calotoiu, Thomas Höhl, Heiko Mantel, Toni Nguyen, Felix Wolf: Design-Time Performance Modeling of Compositional Parallel Programs. Parallel Computing, 108:1–12, September 2021.
+
+Validate this developed framework on GPU
+
 ## 1. GPU Function
 We add 5 GPU kernel
 1. nop-kernel, which do nothing. after being called, it will return.
